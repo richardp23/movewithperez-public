@@ -1,0 +1,18 @@
+---
+import GitHubBlack from '../../assets/brand/github-invertocat-black.svg';
+import GitHubWhite from '../../assets/brand/github-invertocat-white.svg';
+import { GITHUB_MARK_HEIGHT } from '../../lib/images';
+
+interface Props {
+  /** `light` = black mark on light bg; `dark` = white mark on dark bg */
+  surface?: 'light' | 'dark';
+  height?: number;
+}
+
+const { surface = 'light', height = GITHUB_MARK_HEIGHT } = Astro.props;
+const Mark = surface === 'light' ? GitHubBlack : GitHubWhite;
+// Invertocat viewBox is 0 0 98 96 — calculate proportional width to avoid the SVG
+// width attribute (98px) creating a huge transparent gap around the mark.
+const width = Math.round(height * (98 / 96));
+---
+<Mark class="github-mark" width={width} height={height} style={`width:${width}px;height:${height}px;`} aria-hidden="true" />

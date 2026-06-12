@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/forms/ContactForm.tsx';
+import { SITE } from '../config';
+---
+<BaseLayout
+  title="Contact — Let's Talk About Your Move"
+  description="Get in touch — no pressure, just help. I reply within one business day."
+>
+  <section class="shell py-16">
+    <div class="grid gap-10 md:grid-cols-5">
+      <!-- Intro + direct contact -->
+      <div class="md:col-span-2" data-reveal data-reveal-stagger="170">
+        <p class="eyebrow">Contact</p>
+        <h1 class="title-xl mt-2" style="line-height: 1.15;">Let's talk</h1>
+        <p class="mt-4 text-lg" style="color: var(--color-mute);">
+          Question about a neighborhood? Curious what your home is worth? Just starting to think
+          about a move? Send a note — there's no such thing as "too early to ask."
+        </p>
+
+        <div class="card mt-7 p-6" style="background: var(--color-surface-card);">
+          <p class="text-sm font-medium" style="color: var(--color-mute); margin: 0;">My response-time promise</p>
+          <p class="mt-1" style="margin-bottom: 0;">
+            Every message gets a reply within <strong>one business day</strong> — usually much sooner.
+          </p>
+        </div>
+
+        <dl class="mt-7 flex flex-col gap-4">
+          <div data-reveal-item>
+            <dt class="text-sm font-medium" style="color: var(--color-mute);">Phone</dt>
+            <dd style="margin-left: 0;"><a href={`tel:${SITE.agentPhone}`} class="btn btn-ghost mt-1">{SITE.agentPhone}</a></dd>
+          </div>
+          <div data-reveal-item>
+            <dt class="text-sm font-medium" style="color: var(--color-mute);">Email</dt>
+            <dd style="margin-left: 0;"><a href={`mailto:${SITE.email}`} class="btn btn-primary mt-1">{SITE.email}</a></dd>
+          </div>
+          <div data-reveal-item>
+            <dt class="text-sm font-medium" style="color: var(--color-mute);">What happens next</dt>
+            <dd style="margin-left: 0;">
+              <ol class="mt-2 list-decimal pl-5" style="color: var(--color-body);">
+                <li>I read it myself — same day, usually within hours.</li>
+                <li>You get a real reply within one business day. No autoresponders, no drip campaign.</li>
+                <li>If I'm not the right fit for what you need, I'll say so and point you somewhere better.</li>
+              </ol>
+            </dd>
+          </div>
+        </dl>
+
+        {/* TODO: booking embed (Cal.com / Calendly) goes here when ready —
+            a "Book a 15-min call" card linking to the scheduler. */}
+      </div>
+
+      <!-- Form island -->
+      <div class="md:col-span-3" data-reveal>
+        <ContactForm client:visible />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

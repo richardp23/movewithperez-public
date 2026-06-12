@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/base-path';
+import { getReadingTime } from '../../lib/reading-time';
+const posts = (await getCollection('insights')).filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+const featured = posts[0];
+const remainder = posts.slice(1);
+const categoryLabels: Record<string, string> = {
+  market: 'Market',
+  buying: 'Buying',
+  selling: 'Selling',
+  local: 'Local',
+};
+---
+<BaseLayout title="Insights — Local Market Notes" description="Honest, useful notes on the local market.">
+  <section class="shell py-12" style="max-width: 56rem;">
+    <h1 class="title-xl">Insights</h1>
+    <p class="mt-3 text-lg" style="color: var(--color-mute);">
+      Notes on buying, selling, and living in southern Queens — written from the ground here, not from a content calendar.
+    </p>
+
+    {featured && (
+      <article class="card card-interactive mt-8 p-7" data-reveal>
+        <p class="eyebrow" style="color: var(--color-mute);">
+          {categoryLabels[featured.data.category] ?? 'Local'}
+        </p>
+        <h2 class="mt-2 text-3xl">
+          <a href={withBase(`/insights/${featured.id}`)} style="color: var(--color-ink);">
+            {featured.data.title}
+          </a>
+        </h2>
+        <p class="mt-2" style="color: var(--color-mute);">{featured.data.description}</p>
+        <p class="mt-3 text-sm" style="color: var(--color-mute);">
+          {featured.data.publishedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          {' · '}
+          {getReadingTime(featured)} min read
+        </p>
+        <p class="mt-4">
+          <a href={withBase(`/insights/${featured.id}`)} style="color: var(--color-ink); font-weight: 600;">
+            Read the article →
+          </a>
+        </p>
+      </article>
+    )}
+
+    <div class="masonry mt-8" data-reveal data-reveal-stagger="130">
+      {(remainder.length ? remainder : posts).map((p) => (
+        <a href={withBase(`/insights/${p.id}`)} class="card insight-card card-interactive" data-reveal-item>
+          <div class="insight-card-body">
+            <p class="eyebrow" style="color: var(--color-mute); margin: 0;">
+              {categoryLabels[p.data.category] ?? 'Local'}
+            </p>
+            <h2 class="mt-2 text-xl" style="margin-bottom: 0;">{p.data.title}</h2>
+            <p class="insight-card-desc">{p.data.description}</p>
+            <p class="mt-4 text-sm" style="color: var(--color-mute); margin-bottom: 0;">
+              {p.data.publishedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              {' · '}
+              {getReadingTime(p)} min read
+            </p>
+          </div>
+        </a>
+      ))}
+      {posts.length === 0 && <p style="color: var(--color-mute);">First posts coming soon.</p>}
+    </div>
+  </section>
+</BaseLayout>

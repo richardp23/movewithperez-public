@@ -1,0 +1,42 @@
+{
+  "name": "frontend",
+  "type": "module",
+  "version": "0.0.1",
+  "packageManager": "pnpm@11.5.2",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview --port 4321",
+    "preview:a11y": "astro preview --host 127.0.0.1 --port 4322",
+    "astro": "astro",
+    "test": "playwright test",
+    "test:a11y": "playwright test tests/a11y.spec.ts",
+    "test:forms": "playwright test tests/forms.spec.ts",
+    "test:images": "playwright test tests/images.spec.ts",
+    "a11y": "pnpm test:a11y"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/mdx": "^6.0.2",
+    "@astrojs/react": "^5.0.7",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^6.4.5",
+    "maplibre-gl": "^5.24.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
+    "@playwright/test": "^1.56.1",
+    "@tailwindcss/vite": "^4.3.0",
+    "@types/node": "^25.9.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.3.0"
+  }
+}

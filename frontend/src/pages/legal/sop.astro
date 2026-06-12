@@ -1,0 +1,30 @@
+---
+import LegalLayout from '../../layouts/LegalLayout.astro';
+import { withBase } from '../../lib/base-path';
+import { COMPLIANCE } from '../../config';
+---
+<LegalLayout
+  title="Standard Operating Procedures"
+  description="New York Standard Operating Procedures for real estate transactions — required disclosure for prospective buyers."
+  lastUpdated="June 11, 2026"
+>
+  <p>
+      New York law requires that prospective buyers have access to the brokerage's Standard Operating
+      Procedures. The document below is provided by EXIT Realty Central.
+  </p>
+  <p>
+      <a
+        href={COMPLIANCE.sopPdfUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-primary"
+      >
+        View SOP (PDF)
+      </a>
+  </p>
+  <p style="color: var(--color-body);">
+      Opens in a new tab. If you have trouble accessing the document, please
+    <a href={withBase('/contact')} style="color: var(--color-ink); font-weight: 700;">contact me</a>
+      and I will provide a copy.
+  </p>
+</LegalLayout>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  heading?: string;
+  questions: string[];
+  reveal?: boolean;
+}
+
+const { heading = 'Questions to bring me', questions, reveal = true } = Astro.props;
+---
+<section class="shell pb-16" aria-labelledby="questions-heading">
+  <div class="card p-8 md:p-10" style="background: var(--color-surface-card);" data-reveal={reveal ? '' : undefined}>
+    <h2 id="questions-heading" class="text-3xl">{heading}</h2>
+    <ul class="mt-5 flex flex-col gap-3 pl-6" style="list-style: disc;">
+      {questions.map((item) => (
+        <li style="color: var(--color-body);">{item}</li>
+      ))}
+    </ul>
+  </div>
+</section>

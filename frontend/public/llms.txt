@@ -1,0 +1,48 @@
+# example-realestate.dev
+
+> Your guide to living in Queens, NY — Richard Perez, Licensed Real Estate Salesperson at EXIT Realty Central.
+
+Richard Perez (NY License #00000000000) helps buyers, sellers, and renters in southern Queens. The site focuses on honest neighborhood guides, practical process advice, and local market insights — not generic national real estate content.
+
+Service area: Richmond Hill, Woodhaven, Glendale, Howard Beach, and Ozone Park, Queens, NY.
+
+Contact: agent@example.com · +1-555-010-0000 · Brokerage office: EXIT Realty Central, 123 Example Blvd, Ozone Park, NY 11417
+
+## Start here
+
+- [Home](https://example-realestate.dev/): Overview, featured neighborhoods, and paths for buyers, sellers, and explorers
+- [About](https://example-realestate.dev/about/): Agent background and approach
+- [Contact](https://example-realestate.dev/contact/): Schedule a conversation or ask a question
+
+## Buyers, sellers, and renters
+
+- [Buyers](https://example-realestate.dev/buyers/): Buying process, financing basics, and what to expect in Queens
+- [Sellers](https://example-realestate.dev/sellers/): Listing strategy, marketing, and free home valuation
+- [Renters](https://example-realestate.dev/renters/): Renting in Queens — neighborhoods, transit, and practical tips
+
+## Neighborhood guides
+
+- [All neighborhoods](https://example-realestate.dev/neighborhoods/): Hub for southern Queens area guides
+- [Richmond Hill](https://example-realestate.dev/neighborhoods/richmond-hill/): Diverse, food-forward neighborhood with strong transit along Jamaica and Liberty Avenues
+- [Woodhaven](https://example-realestate.dev/neighborhoods/woodhaven/): Classic row houses, Jamaica Avenue commerce, and Forest Park access
+- [Glendale](https://example-realestate.dev/neighborhoods/glendale/): Quieter residential pocket with detached homes and strong community identity
+- [Howard Beach](https://example-realestate.dev/neighborhoods/howard-beach/): Waterfront-adjacent living with canalside homes and car-friendly suburban blocks
+- [Ozone Park](https://example-realestate.dev/neighborhoods/ozone-park/): Practical, diverse hub with varied housing and Rockaway Boulevard energy
+
+## Insights
+
+- [Insights index](https://example-realestate.dev/insights/): Local articles and market commentary
+- [Living for the Game: Southern Queens](https://example-realestate.dev/insights/living-for-the-game-southern-queens/): Buying or renting near NYC sports venues — transit and parkway access over stadium proximity
+
+## Legal and compliance
+
+- [Fair housing](https://example-realestate.dev/legal/fair-housing/): Equal housing opportunity notice
+- [Privacy policy](https://example-realestate.dev/legal/privacy/): How form submissions and site data are handled
+- [Terms of use](https://example-realestate.dev/legal/terms/): Site terms
+- [Accessibility](https://example-realestate.dev/legal/accessibility/): Accessibility statement
+- [Standard operating procedures](https://example-realestate.dev/legal/sop/): NY-required brokerage SOP disclosure
+
+## Optional
+
+- [Sitemap](https://example-realestate.dev/sitemap-index.xml): Machine-readable list of all public pages
+- [Robots](https://example-realestate.dev/robots.txt): Crawler directives

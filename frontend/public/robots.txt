@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://example-realestate.dev/sitemap-index.xml

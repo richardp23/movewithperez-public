@@ -1,0 +1,60 @@
+---
+import LegalLayout from '../../layouts/LegalLayout.astro';
+import { withBase } from '../../lib/base-path';
+import { SITE } from '../../config';
+---
+<!-- BROKER REVIEW REQUIRED before push: confirm this wording with EXIT Realty Central. -->
+<LegalLayout
+  title="Fair Housing"
+  description="EXIT Realty fair housing policy and Equal Housing Opportunity commitment."
+  lastUpdated="June 11, 2026"
+  showEhoMark={true}
+>
+  <p>
+      EXIT Realty Corp. International (“EXIT”) is committed to supporting the guidelines of the U.S.
+      Fair Housing Act (Title VIII of the Civil Rights Act of 1968), as amended, which prohibits
+      discrimination in the sale, rental, and financing of housing transactions because of race, color,
+      religion, sex, handicap, familial status, or national origin. State and local governments may
+      impose additional requirements. Each EXIT Realty office is required to comply with all laws, rules,
+      and regulations pertaining to the real estate industry – including the Fair Housing Act. EXIT is a
+      real estate franchise company. Each EXIT office is independently owned and operated.
+  </p>
+
+  <h2>My commitment</h2>
+  <p>
+      Every client gets the same professional service — full stop. Federal law prohibits housing
+      discrimination based on race, color, religion, sex, disability, familial status, and national
+      origin, and New York State and New York City extend protection further — including lawful source
+      of income, age, sexual orientation, gender identity, marital status, and military status. I follow
+      the letter and the spirit of those laws.
+  </p>
+
+  <h2>What this means when we work together</h2>
+  <ul>
+    <li>I show you every option that fits the criteria and budget you give me. Nothing gets filtered by who lives where.</li>
+    <li>My guides describe housing stock, prices, transit, and trade-offs. Where you belong is your decision — my job is accurate information, not opinions about people.</li>
+    <li>For questions like school performance, I'll point you to official public sources — like the NYC DOE's zone finder — so you can apply your own standards. I don't characterize neighborhoods by who lives in them.</li>
+    <li>Housing vouchers (Section 8, CityFHEPS, HASA, and similar) are lawful income in New York. Source-of-income discrimination is illegal, and I don't participate in it.</li>
+  </ul>
+
+  <h2>If you believe you've experienced discrimination</h2>
+  <p>
+      You can file a complaint with
+      <a href="https://www.hud.gov/fairhousing" target="_blank" rel="noopener noreferrer"> HUD</a>,
+      the
+      <a href="https://dhr.ny.gov" target="_blank" rel="noopener noreferrer"> New York State Division of Human Rights</a>,
+      or the
+      <a href="https://www.nyc.gov/cchr" target="_blank" rel="noopener noreferrer"> NYC Commission on Human Rights</a>.
+      If something felt wrong in a transaction I was part of, I want to know — <a href={withBase('/contact')}>contact me</a>.
+  </p>
+
+  <h2>Official notices</h2>
+  <p>
+    <a href={SITE.nysFairHousingNoticeUrl} target="_blank" rel="noopener noreferrer">
+      New York State Housing and Anti-Discrimination Notice (PDF)
+    </a>
+    {' '}·{' '}
+    <a href={withBase('/legal/sop')}>Standard Operating Procedures</a>
+  </p>
+</LegalLayout>
+<!-- BROKER REVIEW -->

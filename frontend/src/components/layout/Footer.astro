@@ -1,0 +1,90 @@
+---
+import { SITE } from '../../config';
+import { COMPLIANCE_EHO_HEIGHT, COMPLIANCE_NAR_HEIGHT } from '../../lib/images';
+import { withBase } from '../../lib/base-path';
+import { FOOTER_LEGAL_LINKS, FOOTER_QUICK_LINKS } from '../../lib/nav';
+import ExitLogo from '../brand/ExitLogo.astro';
+import NarMembershipMark from '../brand/NarMembershipMark.astro';
+import EqualHousingMark from '../brand/EqualHousingMark.astro';
+import GitHubMark from '../brand/GitHubMark.astro';
+---
+<footer style="background: var(--color-surface-card); border-top: 1px solid var(--color-hairline);">
+  <div class="shell py-10">
+    <div class="grid gap-6 md:grid-cols-3">
+      <div>
+        <p class="eyebrow" style="margin: 0 0 0.6rem; color: var(--color-mute);">Brokerage</p>
+        <div class="mb-1 flex items-center gap-3">
+          <ExitLogo surface="light" />
+          <p class="text-sm font-semibold" style="color: var(--color-ink); margin: 0;">
+            <a href={SITE.brokerWebsite} target="_blank" rel="noopener noreferrer" style="color: inherit;">
+              {SITE.brokerage}
+            </a>
+          </p>
+        </div>
+        <p class="text-sm leading-6" style="color: var(--color-mute); margin: 0;">
+          Address:<br />
+          {SITE.brokerStreet}<br />
+          {SITE.brokerCityStateZip}
+        </p>
+        <p class="text-sm leading-6" style="color: var(--color-mute); margin: 0.2rem 0 0;">Office: {SITE.brokerPhone}</p>
+        <p class="text-sm leading-6" style="color: var(--color-mute); margin: 0.2rem 0 0;">
+          Email: <a href={`mailto:${SITE.brokerEmail}`} style="color: inherit;">{SITE.brokerEmail}</a>
+        </p>
+        <p class="text-sm leading-6" style="color: var(--color-mute); margin: 0.2rem 0 0;">
+          Website:{' '}
+          <a href={SITE.brokerWebsite} target="_blank" rel="noopener noreferrer" style="color: inherit;">
+            {SITE.brokerWebsite.replace(/^https?:\/\//, '')}
+          </a>
+        </p>
+      </div>
+      <div>
+        <p class="eyebrow" style="margin: 0 0 0.6rem; color: var(--color-mute);">Explore</p>
+        <nav class="flex flex-col gap-1.5 text-sm leading-6" aria-label="Footer quick links">
+          {FOOTER_QUICK_LINKS.map((l) => (
+            <a href={withBase(l.path)} style="color: var(--color-mute);">{l.label}</a>
+          ))}
+        </nav>
+      </div>
+      <div>
+        <p class="eyebrow" style="margin: 0 0 0.6rem; color: var(--color-mute);">Legal</p>
+        <nav class="flex flex-col gap-1.5 text-sm leading-6" aria-label="Footer legal links">
+          {FOOTER_LEGAL_LINKS.map((l) => (
+            <a href={withBase(l.path)} style="color: var(--color-mute);">{l.label}</a>
+          ))}
+          <a
+            href={SITE.nysFairHousingNoticeUrl}
+            target="_blank"
+            rel="noopener"
+            style="color: var(--color-mute);"
+          >
+            NYS Fair Housing Notice
+          </a>
+        </nav>
+      </div>
+    </div>
+    <div class="mt-8 flex flex-col gap-2 text-xs" style="color: var(--color-mute); line-height: 1.5;">
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+        <NarMembershipMark surface="light" height={COMPLIANCE_NAR_HEIGHT} />
+        <EqualHousingMark height={COMPLIANCE_EHO_HEIGHT} />
+        <span>Equal Housing Opportunity</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+        <a href={withBase('/legal/privacy')} style="color: inherit;">Privacy</a>
+        <a href={withBase('/legal/terms')} style="color: inherit;">Terms of Use</a>
+        <a
+          href={SITE.publicRepoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5"
+          style="color: inherit;"
+        >
+          <GitHubMark surface="light" />
+          Source on GitHub
+        </a>
+      </div>
+      <p style="margin: 0;">
+        {SITE.agentName} · {SITE.jobTitle} · License #{SITE.licenseNumber} · &copy; {new Date().getFullYear()} {SITE.agentName}. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

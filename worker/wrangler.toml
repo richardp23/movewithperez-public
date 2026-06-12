@@ -1,0 +1,14 @@
+# worker/wrangler.toml — public-snapshot placeholder.
+# Same structure as production; the KV namespace id is account-specific and
+# must be created in your own Cloudflare account:
+#   wrangler kv namespace create RATE_LIMIT_KV
+# then paste the returned id below. The rate limiter is inert until bound.
+
+name = "rp-forms"
+main = "src/index.ts"
+compatibility_date = "2026-06-10"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id = "REPLACE_WITH_NAMESPACE_ID"
+# preview_id = "REPLACE_FOR_LOCAL"     # optional, for wrangler dev

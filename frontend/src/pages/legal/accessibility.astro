@@ -1,0 +1,58 @@
+---
+import LegalLayout from '../../layouts/LegalLayout.astro';
+import { withBase } from '../../lib/base-path';
+---
+<LegalLayout
+  title="Accessibility"
+  description="Accessibility statement for Richard Perez and EXIT Realty Central, including WCAG goals and support contact information."
+  lastUpdated="June 10, 2026"
+>
+  <p>
+      Richard Perez and EXIT Realty Central are committed to making this website usable by everyone,
+      including people with disabilities. Access to housing information should not depend on how you
+      browse the web.
+  </p>
+
+  <h2>Conformance goal</h2>
+  <p>
+      We aim to conform to the Web Content Accessibility Guidelines (WCAG) 2.1, Level AA. These
+      guidelines explain how to make web content more accessible to people with visual, auditory, motor,
+      and cognitive disabilities.
+  </p>
+
+  <h2>What we do</h2>
+  <p>
+      We build with semantic HTML, provide text alternatives for meaningful images, support keyboard
+      navigation, maintain readable color contrast and visible focus indicators, and design pages to
+      remain usable when text is resized or the page is zoomed. Automated accessibility testing runs as
+      part of our build process, and we review pages manually as the site changes.
+  </p>
+
+  <h2>Known limitations</h2>
+  <p>
+      Some content provided by third parties — such as MLS/IDX listing data and embedded maps — may not
+      yet fully meet these goals. We are working to improve those areas and can provide the underlying
+      information in an accessible form on request.
+  </p>
+
+  <h2>Need something in another format?</h2>
+  <p>
+      If any part of this site is hard to use, or you'd like a listing, neighborhood guide, or document
+      in a different format, contact Richard through our
+      <a href={withBase('/contact')} style="color: var(--color-ink); font-weight: 600;">Contact page</a>
+      and we'll help promptly.
+  </p>
+
+  <h2>Reporting a barrier</h2>
+  <p>
+      We welcome your feedback. If you hit an accessibility barrier, use our
+      <a href={withBase('/contact')} style="color: var(--color-ink); font-weight: 600;">Contact page</a>
+      and tell us the page and the problem. We aim to respond within one business day.
+  </p>
+
+  <p>
+      This statement reflects our ongoing commitment to accessibility and to fair, equal access to
+      housing. See also our <a href={withBase('/legal/fair-housing')} style="color: var(--color-ink); font-weight: 600;">Fair Housing page</a>.
+  </p>
+</LegalLayout>
+  

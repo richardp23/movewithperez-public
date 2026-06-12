@@ -1,0 +1,13 @@
+# Local Worker development template.
+# Copy to `worker/.dev.vars` for local `wrangler dev`.
+# Do NOT commit real values.
+
+RESEND_API_KEY=
+TURNSTILE_SECRET_KEY=
+TO_EMAIL=
+FROM_EMAIL=
+ALLOWED_ORIGIN=
+CRM_WEBHOOK_URL=
+
+# Optional hardening
+# RATE_LIMIT_MAX_PER_MINUTE=20

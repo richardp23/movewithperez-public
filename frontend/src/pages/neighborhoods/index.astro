@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NeighborhoodCarousel from '../../components/neighborhood/NeighborhoodCarousel.astro';
+import NeighborhoodMap from '../../components/map/NeighborhoodMap.tsx';
+import { toNeighborhoodCarouselItems } from '../../lib/neighborhoods';
+
+const items = (await getCollection('neighborhoods')).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+);
+
+const markers = items.map((n) => ({
+  name: n.data.name,
+  slug: n.id,
+  lat: n.data.lat,
+  lng: n.data.lng,
+}));
+
+const carouselItems = toNeighborhoodCarouselItems(items);
+---
+<BaseLayout
+  title="Neighborhood Guides — Living in the Area"
+  description="In-depth, local guides to the neighborhoods I serve — lifestyle, market, and what it's really like to live there."
+>
+  <section class="section-y shell">
+    <h1 class="display-xl">Neighborhood guides</h1>
+    <p class="mt-3 max-w-2xl text-lg" style="color: var(--color-mute);">
+      Real, lived-in guides to the places I know best. Start here to find where you belong.
+    </p>
+
+    <div class="mt-8">
+      <NeighborhoodMap markers={markers} label="Map of all neighborhood guides" client:visible />
+    </div>
+
+    <NeighborhoodCarousel
+      id="guides-carousel"
+      label="All guides"
+      items={carouselItems}
+    />
+  </section>
+</BaseLayout>
