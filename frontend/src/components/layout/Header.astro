@@ -1,0 +1,93 @@
+---
+import { SITE } from '../../config';
+import { withBase } from '../../lib/base-path';
+import { PRIMARY_NAV_LINKS } from '../../lib/nav';
+import ExitLogo from '../brand/ExitLogo.astro';
+
+const pathname = Astro.url.pathname;
+
+function normalizePath(path: string) {
+  if (path !== '/' && path.endsWith('/')) return path.slice(0, -1);
+  return path;
+}
+
+function isActive(path: string) {
+  const targetPath = normalizePath(new URL(withBase(path), Astro.url).pathname);
+  const currentPath = normalizePath(pathname);
+  if (path === '/') return currentPath === targetPath;
+  return currentPath === targetPath || currentPath.startsWith(`${targetPath}/`);
+}
+---
+<header
+  class="sticky top-0 z-50"
+  data-mobile-nav
+  style="background: color-mix(in srgb, var(--color-canvas) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--color-hairline);"
+>
+  <nav class="shell flex items-center justify-between py-4" aria-label="Main">
+    <a href={withBase('/')} class="cobrand-lockup min-w-0">
+      <ExitLogo surface="light" loading="eager" fetchpriority="high"/>
+      <span class="wordmark text-lg">{SITE.agentName}</span>
+    </a>
+    <div class="flex shrink-0 items-center gap-3 md:gap-7">
+      <div class="nav-desktop-only items-center gap-7">
+        {PRIMARY_NAV_LINKS.map((l) => (
+          <a
+            href={withBase(l.path)}
+            class="nav-link"
+            aria-current={isActive(l.path) ? 'page' : undefined}
+          >
+            {l.label}
+          </a>
+        ))}
+      </div>
+      <button
+        type="button"
+        class="nav-menu-btn"
+        data-mobile-nav-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav-menu"
+        aria-label="Open menu"
+      >
+        <span class="nav-menu-icon" aria-hidden="true">
+          <span class="nav-menu-bar"></span>
+          <span class="nav-menu-bar"></span>
+          <span class="nav-menu-bar"></span>
+        </span>
+      </button>
+      <a href={withBase('/contact')} class="nav-contact-desktop btn btn-primary" style="padding: 0.5rem 1.1rem;">Contact</a>
+    </div>
+  </nav>
+
+  <div id="mobile-nav-menu" class="mobile-nav-panel" data-mobile-nav-panel hidden>
+    <div class="mobile-nav-panel-inner">
+      <ul class="mobile-nav-list">
+        {PRIMARY_NAV_LINKS.map((l) => (
+          <li>
+            <a
+              href={withBase(l.path)}
+              class="mobile-nav-link"
+              aria-current={isActive(l.path) ? 'page' : undefined}
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="mobile-nav-cta">
+        <a
+          href={withBase('/contact')}
+          class="mobile-nav-contact btn btn-primary"
+          aria-current={isActive('/contact') ? 'page' : undefined}
+        >
+          Contact
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { initMobileNavs } from '../../lib/mobile-nav.ts';
+  initMobileNavs();
+  document.addEventListener('astro:page-load', initMobileNavs);
+</script>

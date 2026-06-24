@@ -1,0 +1,17 @@
+{
+  "name": "richard-realestate-monorepo",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.5.2",
+  "scripts": {
+    "dev": "pnpm --filter ./frontend dev",
+    "build": "pnpm --filter ./frontend build",
+    "a11y": "pnpm --filter ./frontend a11y",
+    "check:language": "node scripts/language-check.mjs",
+    "test:language": "node --test scripts/language-check.test.mjs",
+    "test:forms": "pnpm --filter ./frontend test:forms",
+    "worker:dev": "pnpm --filter ./worker dev",
+    "worker:test": "pnpm --filter ./worker test",
+    "export:public": "node scripts/export-public.mjs"
+  }
+}

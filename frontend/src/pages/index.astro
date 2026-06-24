@@ -1,0 +1,114 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NeighborhoodCarousel from '../components/neighborhood/NeighborhoodCarousel.astro';
+import { withBase } from '../lib/base-path';
+import { toNeighborhoodCarouselItems } from '../lib/neighborhoods';
+import { getReadingTime } from '../lib/reading-time';
+import { IMAGES, SITE } from '../config';
+
+const neighborhoods = await getCollection('neighborhoods');
+const carouselItems = toNeighborhoodCarouselItems(neighborhoods);
+const latestInsight = (await getCollection('insights'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())[0];
+---
+<BaseLayout
+  title={`${SITE.agentName} — ${SITE.brokerage} | ${SITE.tagline}`}
+  description="Local expertise, modern process, zero pressure. Explore neighborhood guides and find your place."
+>
+  <section class="shell home-hero-section">
+    <div class="home-hero-grid grid items-center md:grid-cols-2">
+      <div class="text-center md:text-left">
+        <h1 class="display-xl">{SITE.tagline}</h1>
+        <p class="mx-auto mt-5 max-w-xl text-lg md:mx-0" style="color: var(--color-mute);">
+          Local expertise, modern marketing, and a calm, honest process. Let's find where you belong.
+        </p>
+        <div class="mt-7 flex flex-wrap justify-center gap-3 md:justify-start">
+          <a href={withBase('/neighborhoods')} class="btn btn-primary">Explore neighborhoods</a>
+          <a href={withBase('/sellers')} class="btn btn-ghost">What's my home worth?</a>
+        </div>
+      </div>
+      <Image
+        src={IMAGES.homeHero}
+        alt={IMAGES.homeHeroAlt}
+        widths={[480, 768, 1024]}
+        sizes="(max-width: 768px) 100vw, 50vw"
+        class="media-frame card-lg w-full"
+        style="object-fit: cover; aspect-ratio: 4 / 3;"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+
+  <!-- Route picker -->
+  <section class="shell section-stack">
+    <div class="grid gap-5 md:grid-cols-3" data-reveal data-reveal-stagger="140">
+      {[
+        { href: withBase('/buyers'), title: "I'm buying", body: 'Guides, process, and a partner who listens.' },
+        { href: withBase('/sellers'), title: "I'm selling", body: 'Modern marketing and a free home valuation.' },
+        { href: withBase('/renters'), title: "I'm renting", body: 'Clear fees, honest guidance, and listings that fit.' },
+      ].map((c) => (
+        <a href={c.href} class="card card-interactive block p-6" data-reveal-item>
+          <h2 class="text-xl" style="margin: 0; font-weight: 600;">{c.title}</h2>
+          <p class="mt-2 text-sm" style="color: var(--color-mute); margin: 0;">{c.body}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="shell section-stack">
+    <div data-reveal>
+      <NeighborhoodCarousel
+        id="home-neighborhoods"
+        label="Featured neighborhoods"
+        items={carouselItems}
+        flushTop
+      />
+    </div>
+    <p class="mt-5 text-center md:text-left">
+      <a href={withBase('/neighborhoods')} class="text-sm font-semibold" style="color: var(--color-ink);">
+        View all neighborhood guides →
+      </a>
+    </p>
+  </section>
+
+  {latestInsight && (
+    <section class="shell section-stack section-stack-tail">
+      <article class="card card-interactive p-7" data-reveal>
+        <p class="eyebrow" style="color: var(--color-mute);">Latest insight</p>
+        <h2 class="mt-2 text-3xl">
+          <a href={withBase(`/insights/${latestInsight.id}`)} style="color: var(--color-ink);">
+            {latestInsight.data.title}
+          </a>
+        </h2>
+        <p class="mt-2" style="color: var(--color-mute);">{latestInsight.data.description}</p>
+        <p class="mt-3 text-sm" style="color: var(--color-mute);">
+          {latestInsight.data.publishedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          {' · '}
+          {getReadingTime(latestInsight)} min read
+        </p>
+        <p class="mt-4">
+          <a href={withBase(`/insights/${latestInsight.id}`)} style="color: var(--color-ink); font-weight: 600;">
+            Read the article →
+          </a>
+        </p>
+      </article>
+    </section>
+  )}
+
+  <!-- Valuation band — plain surface-card, accent CTA only -->
+  <section class="shell section-stack-tail">
+    <div
+      class="card flex flex-col items-center gap-4 p-10 text-center"
+      style="background: var(--color-surface-card);"
+      data-reveal
+    >
+      <h2 class="text-3xl" style="font-weight: 700;">Curious what your home is worth?</h2>
+      <p style="color: var(--color-mute); margin: 0;">A free, no-obligation valuation — and zero spam.</p>
+      <a href={withBase('/sellers')} class="btn btn-primary">Get my valuation</a>
+    </div>
+  </section>
+</BaseLayout>

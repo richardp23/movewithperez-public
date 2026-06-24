@@ -1,0 +1,68 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/base-path';
+import { SITE } from '../../config';
+import { getReadingTime } from '../../lib/reading-time';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('insights')).filter((p) => !p.data.draft);
+  return posts.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content, headings } = await render(entry);
+const tocHeadings = headings.filter((h) => h.depth === 2);
+const categoryLabels: Record<string, string> = {
+  market: 'Market',
+  buying: 'Buying',
+  selling: 'Selling',
+  local: 'Local',
+};
+---
+<BaseLayout title={data.title} description={data.description}>
+  <article class="shell py-10">
+    <nav class="mb-6 text-sm" aria-label="Breadcrumb" style="color: var(--color-mute);">
+      <a href={withBase('/')} style="color: inherit;">Home</a> ›
+      <a href={withBase('/insights')} style="color: inherit;">Insights</a> ›
+      <span>{data.title}</span>
+    </nav>
+
+    <p class="eyebrow" style="color: var(--color-mute);">{categoryLabels[data.category] ?? 'Local'}</p>
+    <h1 class="title-xl mt-2">{data.title}</h1>
+    <p class="mt-3 text-lg" style="color: var(--color-mute);">{data.description}</p>
+    <p class="mt-3 text-sm" style="color: var(--color-mute);">
+      {SITE.agentName}
+      {' · '}
+      {data.publishedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+      {' · '}
+      {getReadingTime(entry)} min read
+    </p>
+
+    <div class="toc-layout mt-10">
+      {tocHeadings.length > 0 && (
+        <nav class="toc-rail" aria-label="On this page">
+          <p class="text-sm font-semibold" style="color: var(--color-mute); margin: 0 0 0.75rem;">On this page</p>
+          <ul class="flex flex-col gap-2 text-sm" style="list-style: none; padding: 0; margin: 0;">
+            {tocHeadings.map((h) => (
+              <li>
+                <a href={`#${h.slug}`} style="color: var(--color-mute); text-decoration: none;">
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+      <div class="prose max-w-none">
+        <Content />
+      </div>
+    </div>
+
+    <section class="card mt-12 p-8 text-center">
+      <h2 class="text-2xl">Want to talk it through? No pressure — just a straight answer.</h2>
+      <a href={withBase('/contact')} class="btn btn-primary mt-5">Contact</a>
+    </section>
+  </article>
+</BaseLayout>

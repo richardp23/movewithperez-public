@@ -1,0 +1,29 @@
+NOTICE — exclusions from the MIT code license
+
+1. EXIT Realty trademarks and brand assets
+   The EXIT Realty name, logos, and brand marks are trademarks of
+   EXIT Realty Corp. International. They are EXCLUDED from this snapshot:
+   every brand image has been replaced with a neutral generated placeholder.
+   Nothing in this repository grants any right to use EXIT Realty marks.
+
+2. Neighborhood photography
+   In the private production repository, neighborhood hero photos are sourced
+   from Wikimedia Commons under CC BY-SA 3.0 / 4.0 and retain their own
+   copyleft license with attribution rendered on-page. Those photographs are
+   NOT included in this snapshot; the hero images here are generated
+   placeholders. If you reuse CC BY-SA imagery, keep its attribution intact —
+   it is never covered by the MIT grant.
+
+3. Authored editorial content
+   The production neighborhood guides, articles, and page copy are the
+   property of Richard Perez, all rights reserved. They are OMITTED from this
+   snapshot and replaced with placeholder text. The placeholder text itself is
+   not meaningful content.
+
+4. Agent and brokerage details
+   Contact details, license numbers, addresses, the production domain, and
+   account identifiers have been replaced with placeholders. Email addresses in
+   the snapshot are limited to @example.com and @yourdomain.com placeholders;
+   real agent, broker, and franchise addresses are scrubbed before publish.
+   The placeholders (+1-555 numbers, REPLACE_WITH_NAMESPACE_ID, etc.) are not
+   real and must be substituted with your own values if you deploy this code.

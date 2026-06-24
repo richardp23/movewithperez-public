@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import exitLogoRgb from '../../assets/brand/exit-logo-rgb.png';
+import exitLogoKoRgb from '../../assets/brand/exit-logo-ko-rgb.png';
+import {
+  BRAND_MARK_RENDER_SCALE,
+  EXIT_LOGO_HEIGHT,
+  EXIT_LOGO_KO_ASPECT,
+  EXIT_LOGO_RGB_ASPECT,
+} from '../../lib/images';
+
+interface Props {
+  /** `light` = RGB on white/cream surfaces; `dark` = KO on dark surfaces */
+  surface?: 'light' | 'dark';
+  height?: number;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const {
+  surface = 'light',
+  height = EXIT_LOGO_HEIGHT,
+  loading,
+  fetchpriority,
+} = Astro.props;
+const src = surface === 'light' ? exitLogoRgb : exitLogoKoRgb;
+const aspect = surface === 'light' ? EXIT_LOGO_RGB_ASPECT : EXIT_LOGO_KO_ASPECT;
+const renderHeight = height * BRAND_MARK_RENDER_SCALE;
+const width = Math.round(renderHeight * aspect);
+---
+<Image
+  src={src}
+  alt="EXIT Realty"
+  width={width}
+  height={renderHeight}
+  decoding="async"
+  loading={loading}
+  fetchpriority={fetchpriority}
+  class="brand-logo"
+  style={`height: ${height}px; width: auto;`}
+/>

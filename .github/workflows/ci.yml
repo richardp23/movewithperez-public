@@ -1,0 +1,34 @@
+# Public snapshot CI — build + tests only (no deploy secrets).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build frontend
+        run: pnpm build
+        env:
+          PUBLIC_FORM_ENDPOINT: https://forms-worker.example-account.workers.dev
+          PUBLIC_TURNSTILE_SITEKEY: 1x00000000000000000000AA
+      - name: Worker unit tests
+        run: pnpm worker:test
+      - name: Accessibility (Playwright + axe)
+        run: pnpm a11y
+      - name: Form tests
+        run: pnpm test:forms

@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+import realtorRgb from '../../assets/brand/realtor-cobrand-rgb.png';
+import realtorKo from '../../assets/brand/realtor-cobrand-ko.png';
+import { BRAND_MARK_RENDER_SCALE, REALTOR_COBRAND_ASPECT, REALTOR_COBRAND_HEIGHT } from '../../lib/images';
+
+interface Props {
+  /** `light` = black mark on light bg; `dark` = white mark on dark bg */
+  surface?: 'light' | 'dark';
+  height?: number;
+}
+
+const { surface = 'light', height = REALTOR_COBRAND_HEIGHT } = Astro.props;
+const src = surface === 'light' ? realtorRgb : realtorKo;
+const renderHeight = height * BRAND_MARK_RENDER_SCALE;
+const width = Math.round(renderHeight * REALTOR_COBRAND_ASPECT);
+---
+<Image
+  src={src}
+  alt="REALTOR®"
+  width={width}
+  height={renderHeight}
+  loading="lazy"
+  decoding="async"
+  class="realtor-cobrand"
+  style={`height: ${height}px; width: auto;`}
+/>

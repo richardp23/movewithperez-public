@@ -1,0 +1,14 @@
+{
+  "name": "worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260610.0",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.72.1"
+  }
+}

@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/base-path';
+import { faqSchema } from '../lib/schema';
+import { SITE } from '../config';
+import TalkItThroughCard from '../components/ui/TalkItThroughCard.astro';
+import QuestionsBlock from '../components/ui/QuestionsBlock.astro';
+
+const steps = [
+  {
+    title: 'Talk it through',
+    body: 'A relaxed 15-minute call: what you\u2019re looking for, your timeline, your budget comfort zone. No commitment — just clarity on where you stand.',
+  },
+  {
+    title: 'Get pre-approved',
+    body: 'Before we tour anything, a lender letter tells us your real range and makes your offers credible. I can connect you with local lenders who actually pick up the phone.',
+  },
+  {
+    title: 'Tour with intention',
+    body: 'We see homes that fit — not everything on the market. At each one I\u2019ll point out what the listing photos hide, good and bad.',
+  },
+  {
+    title: 'Offer & negotiate',
+    body: 'I build your offer on comps, not vibes, and negotiate price, terms, and timing on your behalf. You decide; I advocate.',
+  },
+  {
+    title: 'Inspect & close',
+    body: 'Inspection, attorney review, appraisal, walkthrough, keys. I track every deadline so nothing slips — NY closings have a lot of moving parts.',
+  },
+];
+
+const financing = [
+  {
+    term: 'Pre-qualification vs. pre-approval',
+    def: 'Pre-qualification is an estimate from a quick conversation. Pre-approval means a lender verified your finances — it\u2019s the one sellers take seriously.',
+  },
+  {
+    term: 'Down payment',
+    def: 'Twenty percent avoids mortgage insurance, but it\u2019s not the entry fee. Conventional loans can go as low as 3% down, FHA 3.5% — and NY has first-time buyer assistance programs worth asking about.',
+  },
+  {
+    term: 'Closing costs',
+    def: 'Plan for roughly 2\u20135% of the purchase price on top of your down payment: attorney fees, title insurance, taxes, and lender fees. I\u2019ll walk you through the estimate line by line.',
+  },
+  {
+    term: 'Rate vs. price',
+    def: 'You marry the house, you date the rate. A good price on the right home usually beats waiting for a perfect rate that may never come — and refinancing later is always an option.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How much does it cost to work with a buyer\u2019s agent?',
+    a: 'We\u2019ll discuss compensation clearly and in writing before we start working together, so there are no surprises. In many transactions the seller offers compensation to the buyer\u2019s agent — every situation is different, and I\u2019ll explain exactly how it works for yours.',
+  },
+  {
+    q: 'I\u2019m a first-time buyer and the process feels overwhelming. Is that normal?',
+    a: 'Completely. My job is to break it into one decision at a time, explain everything in plain English, and never rush you. Most of my buyers tell me the process felt far more manageable than they expected.',
+  },
+  {
+    q: 'How long does buying a home in NY take?',
+    a: 'From accepted offer to closing, typically 60\u201390 days in New York because attorney review and bank processing take time. The search itself can take weeks or months — it depends on the market and how specific your needs are.',
+  },
+  {
+    q: 'Do I need 20% down?',
+    a: 'No. Many buyers put down far less — conventional loans start around 3% down and FHA at 3.5%. Less than 20% usually means mortgage insurance, which we\u2019ll factor into your monthly budget honestly.',
+  },
+  {
+    q: 'Should I wait for prices or rates to drop?',
+    a: 'Nobody can time the market — not even the people on TV. The better question is whether buying now fits your life and your budget. I\u2019ll give you the current data for the neighborhoods you care about, and you decide.',
+  },
+];
+const faqLd = faqSchema(faqs);
+---
+<BaseLayout
+  title="Buying a Home in NY — A Calm, Guided Process"
+  description="A step-by-step buying process, plain-English financing basics, and a buyer's agent who tells the truth. First-time buyers welcome."
+>
+  <set:html value={`<script type="application/ld+json">${JSON.stringify(faqLd)}</script>`} />
+
+  <!-- Hero -->
+  <section class="mx-auto max-w-3xl px-5 pt-16 pb-12">
+    <p class="eyebrow">For buyers</p>
+    <h1 class="title-xl mt-2" style="line-height: 1.15;">
+      Buying a home, without the panic
+    </h1>
+    <p class="mt-5 text-lg" style="color: var(--color-mute);">
+      Whether it's your first home or your fourth, the process should feel guided — not like a
+      series of deadlines happening to you. Here's how we'll do it, start to finish.
+    </p>
+    <div class="mt-7 flex flex-wrap gap-3">
+      <a href={withBase('/contact')} class="btn btn-primary">Book a free buyer consult</a>
+      <a href={withBase('/neighborhoods')} class="btn btn-ghost">Browse neighborhood guides</a>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="shell pb-16" aria-labelledby="process-heading">
+    <h2 id="process-heading" class="text-3xl">The process, step by step</h2>
+    <div class="mt-6 grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
+      <ol class="timeline" data-reveal data-reveal-stagger="160">
+        {steps.map((s, i) => (
+          <li class="card flex gap-5 p-6" data-reveal-item>
+            <span aria-hidden="true" class="step-number">{i + 1}</span>
+            <div>
+              <h3 class="text-xl" style="margin: 0;">{s.title}</h3>
+              <p class="mt-2" style="color: var(--color-mute); margin-bottom: 0;">{s.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div class="xl:sticky xl:top-24">
+        <TalkItThroughCard />
+      </div>
+    </div>
+  </section>
+
+  <!-- Financing basics -->
+  <section class="shell pb-16" aria-labelledby="financing-heading">
+    <div class="card p-8 md:p-10" style="background: var(--color-surface-card);">
+      <h2 id="financing-heading" class="text-3xl">Financing, in plain English</h2>
+      <p class="mt-3 max-w-2xl" style="color: var(--color-mute);">
+        You don't need to become a mortgage expert — you need the four ideas that actually affect
+        your decision. (For specifics, talk to a licensed lender; I'm happy to introduce you.)
+      </p>
+      <dl class="mt-7 grid gap-2 md:grid-cols-2 2xl:grid-cols-4" data-reveal data-reveal-stagger="140">
+        {financing.map((f) => (
+          <div class="card p-6" data-reveal-item>
+            <dt class="text-lg" style="font-weight: 600; color: var(--color-ink);">{f.term}</dt>
+            <dd class="mt-2" style="color: var(--color-mute); margin-left: 0;">{f.def}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- What I do -->
+  <section class="mx-auto max-w-3xl px-5 pb-16" aria-labelledby="role-heading">
+    <h2 id="role-heading" class="text-3xl">What I actually do for you</h2>
+    <ul class="mt-5 flex flex-col gap-3 pl-6" style="list-style: disc;">
+      {[
+        'Search beyond the portals — including homes coming to market before they hit your apps',
+        'Point out what photos hide: the busy road, the slope in the floor, the renovation that wasn\u2019t permitted',
+        'Run the comps so your offer is competitive without overpaying',
+        'Negotiate price, repairs, and timing — and keep it from getting personal',
+        'Coordinate lender, attorney, inspector, and title so deadlines don\u2019t slip',
+        'Stay reachable. Same-day replies, seven days a week',
+      ].map((item) => (
+        <li style="color: var(--color-body);">{item}</li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- FAQ -->
+  <section class="shell pb-16" aria-labelledby="faq-heading">
+    <h2 id="faq-heading" class="text-3xl">Common questions</h2>
+    <div class="faq-grid mt-5" data-reveal data-reveal-stagger="180">
+      {faqs.map((f) => (
+        <details class="card p-6" data-reveal-item>
+          <summary class="text-lg" style="cursor: pointer; font-weight: 500; color: var(--color-ink);">{f.q}</summary>
+          <p class="mt-3" style="color: var(--color-mute); margin-bottom: 0;">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <QuestionsBlock
+    questions={[
+      'What will this house actually sell for, in your view?',
+      "What are the listing photos not showing me?",
+      "What does this block cost to live on — beyond the mortgage?",
+      'Would you buy here? Why or why not?',
+    ]}
+  />
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-3xl px-5 pb-20 text-center">
+    <div class="card-lg card p-10">
+      <h2 class="text-3xl">Ready when you are</h2>
+      <p class="mx-auto mt-3 max-w-xl text-lg" style="color: var(--color-mute);">
+        Start with a free, no-pressure consult. We'll map out your budget, your timeline, and your
+        first three steps — even if "buy a house" is still a someday idea.
+      </p>
+      <a href={withBase('/contact')} class="btn btn-primary mt-6">Book a buyer consult</a>
+      <p class="mt-4 text-sm" style="color: var(--color-mute);">
+        Or just email {SITE.email} — I reply within one business day.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

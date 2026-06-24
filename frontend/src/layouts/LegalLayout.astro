@@ -1,0 +1,42 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import EqualHousingMark from '../components/brand/EqualHousingMark.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  lastUpdated?: string;
+  intro?: string;
+  source?: { label: string; url: string };
+  showEhoMark?: boolean;
+}
+
+const { title, description, lastUpdated, intro, source, showEhoMark = false } = Astro.props;
+---
+<BaseLayout title={title} description={description} noindex={true}>
+  <section class="mx-auto max-w-4xl px-5 py-12">
+    <p class="eyebrow" style="color: var(--color-mute);">Legal</p>
+    <div class="mt-2 flex items-center gap-3">
+      <h1 class="title-xl">{title}</h1>
+      {showEhoMark && <EqualHousingMark />}
+    </div>
+    {lastUpdated && (
+      <p class="mt-2 text-sm" style="color: var(--color-body);">Last updated: {lastUpdated}</p>
+    )}
+    {intro && <p class="mt-5 text-lg" style="color: var(--color-mute);">{intro}</p>}
+
+    <div class="prose mt-8 max-w-none">
+      <slot />
+    </div>
+
+    {source && (
+      <p class="mt-10 pt-5 text-sm" style="color: var(--color-mute); border-top: 1px solid var(--color-hairline); line-height: 1.7;">
+        Source adapted from {source.label}:{' '}
+        <a href={source.url} target="_blank" rel="noopener noreferrer" style="color: var(--color-ink); font-weight: 600;">
+          {source.url}
+        </a>.
+        {' '}For the complete and controlling language, please review the original directly.
+      </p>
+    )}
+  </section>
+</BaseLayout>
